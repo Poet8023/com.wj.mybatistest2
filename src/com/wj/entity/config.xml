@@ -5,15 +5,23 @@
 
 <configuration>
     <!-- 环境配置 -->
+    <!-- -->
+    <properties resource="db.properties"/>
+    <!--设置单个别名-->
+    <typeAliases>
+        <package name="com.wj.entity"/>
+    </typeAliases>
+
+    <!--批量设置别名-->
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <!-- 数据库连接相关配置 ,这里动态获取config.properties文件中的内容-->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/student?useSSL=false&amp;serverTimezone=GMT " />
-                <property name="username" value="root" />
-                <property name="password" value="Poet@wj." />
+                <property name="driver" value="${driver}" />
+                <property name="url" value="${url}" />
+                <property name="username" value="${username}" />
+                <property name="password" value="${password}" />
             </dataSource>
         </environment>
     </environments>

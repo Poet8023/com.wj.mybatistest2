@@ -15,12 +15,12 @@ public class Test {
         Test te=new Test();
 
         te.quarrybyid();
-        te.quarry();
-        te.add();
-        te.quarry();
-        te.delete();
-        te.update();
-        te.quarry();
+//        te.quarry();
+//        te.add();
+//        te.quarry();
+//        te.delete();
+//        te.update();
+//        te.quarry();
 
     }
 
