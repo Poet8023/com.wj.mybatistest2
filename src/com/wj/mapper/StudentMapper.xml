@@ -30,4 +30,27 @@
         delete from student where stuno=#{stuno}
     </delete>
 
+    <select id="quarrystubySQLtag" parameterType="student" resultType="student">
+        select stuno,stuname from student
+        <where>
+            <if test="stuname!=null and stuname!=''">
+                and stuname=#{stuname}
+            </if>
+            <if test="stuage!=null and stuage!=''">
+                and stuname=#{stuname}
+            </if>
+        </where>
+    </select>
+
+    <select id="quarryStuWithStunosInGrade" parameterType="grade" resultType="student">
+        select * from student
+        <where>
+              <if test="stuNos!=null and stuNos.size>0">
+              <foreach collection="stuNos" open=" stuno in(" close=")" item="stuno" separator=",">
+                ${stuno}
+              </foreach>
+              </if>
+        </where>
+    </select>
+
 </mapper>

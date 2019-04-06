@@ -5,6 +5,8 @@ public class Student {
     private  String stuname;
     private  int stuage;
     private String gradename;
+    private StudentCard studentCard;
+
 
     public Student() {
     }

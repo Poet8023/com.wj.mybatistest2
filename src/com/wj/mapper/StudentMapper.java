@@ -1,5 +1,6 @@
 package com.wj.mapper;
 
+import com.wj.entity.Grade;
 import com.wj.entity.Student;
 
 import java.util.List;
@@ -28,4 +29,9 @@ public interface StudentMapper {
     public abstract void delete(int stuno);
 
     public abstract void update(Student student);
+
+    public abstract  List<Student> quarrystubySQLtag(Student student);
+
+    public abstract  List<Student> quarryStuWithStunosInGrade(Grade grade);
+
 }
