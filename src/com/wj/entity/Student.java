@@ -1,10 +1,12 @@
 package com.wj.entity;
 
 public class Student {
+    //学生信息
     private int stuno;
     private  String stuname;
     private  int stuage;
     private String gradename;
+    //学生证信息
     private StudentCard studentCard;
 
 
@@ -50,11 +52,24 @@ public class Student {
         this.gradename = gradename;
     }
 
+    public StudentCard getStudentCard() {
+        return studentCard;
+    }
+
+    public void setStudentCard(StudentCard studentCard) {
+        this.studentCard = studentCard;
+    }
+
     @Override
     public String toString() {
+//        return "stuno=" + stuno +
+//                ", stuname=" + stuname  +
+//                ", stuage=" + stuage +
+//                ", gradename=" + gradename ;
         return "stuno=" + stuno +
                 ", stuname=" + stuname  +
                 ", stuage=" + stuage +
-                ", gradename=" + gradename ;
+                ", stucardid="+this.studentCard.getStucardId()+
+                ", stucardinfo="+this.studentCard.getStucardInfo();
     }
 }

@@ -41,7 +41,7 @@
             </if>
         </where>
     </select>
-
+    <!-- 在年级中查找所有学生的信息-->
     <select id="quarryStuWithStunosInGrade" parameterType="grade" resultType="student">
         select * from student
         <where>
@@ -53,4 +53,37 @@
         </where>
     </select>
 
+    <select id="quarryStudnetByNoWithObO" parameterType="int" resultMap="stu_stucard_map">
+        select s.*,c.* from student s inner join stucard c on s.stucardid=c.stucardid where stuno=#{stuNo}
+    </select>
+    <resultMap id="stu_stucard_map" type="student">
+        <!--学生的信息-->
+        <!-- 注意property中的值要和类里面的属性严格对应，区分大小写   column中的值为数据库中的值，不区分大小写  -->
+        <id property="stuno" column="stuno"/>
+        <result property="stuname" column="stuname"/>
+        <result property="stuage" column="stuage"/>
+        <!--  一对一的时候用association  javaType指定该属性的类型-->
+        <!--   一对多的时候用collection -->
+        <association property="studentCard" javaType="StudentCard">
+            <id property="stucardId" column="stucardid"/>
+            <result property="stucardInfo" column="stucardinfo"/>
+        </association>
+    </resultMap>
+
+    <select id="quarryStudentAndClass" parameterType="int" resultMap="stu_stuclass_map">
+        select  s.*,c.* from student s inner join stuclass c
+        on s.classid=c.classid
+        where s.classId=#{classId}
+    </select>
+    <resultMap id="stu_stuclass_map" type="StudentClass">
+    <!--主类为studentclass,所以先配置主类-->
+        <id property="classId" column="classId"/>
+        <result property="className" column="className"/>
+        <!--  一对多使用collection    并且使用ofType-->
+        <collection property="students" ofType="student">
+            <id property="stuno" column="stuno"/>
+            <result property="stuname" column="stuname"/>
+            <result property="stuage" column="stuage"/>
+        </collection>
+    </resultMap>
 </mapper>

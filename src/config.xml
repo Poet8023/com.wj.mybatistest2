@@ -7,6 +7,11 @@
     <!-- 环境配置 -->
     <!-- -->
     <properties resource="db.properties"/>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    
+    
     <!--设置单个别名-->
     <typeAliases>
         <package name="com.wj.entity"/>

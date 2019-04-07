@@ -2,6 +2,7 @@ package com.wj.mapper;
 
 import com.wj.entity.Grade;
 import com.wj.entity.Student;
+import com.wj.entity.StudentClass;
 
 import java.util.List;
 
@@ -33,5 +34,9 @@ public interface StudentMapper {
     public abstract  List<Student> quarrystubySQLtag(Student student);
 
     public abstract  List<Student> quarryStuWithStunosInGrade(Grade grade);
+
+    public abstract Student quarryStudnetByNoWithObO(int stuno);
+
+    public abstract  StudentClass quarryStudentAndClass(int classid);
 
 }

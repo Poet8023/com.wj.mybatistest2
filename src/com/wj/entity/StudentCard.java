@@ -1,22 +1,22 @@
 package com.wj.entity;
 
 public class StudentCard {
-    private  int cardId;
-    private String cardInfo;
+    private  int stucardId;
+    private String stucardInfo;
 
-    public int getCardId() {
-        return cardId;
+    public int getStucardId() {
+        return stucardId;
     }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
+    public void setStucardId(int stucardId) {
+        this.stucardId = stucardId;
     }
 
-    public String getCardInfo() {
-        return cardInfo;
+    public String getStucardInfo() {
+        return stucardInfo;
     }
 
-    public void setCardInfo(String cardInfo) {
-        this.cardInfo = cardInfo;
+    public void setStucardInfo(String stucardInfo) {
+        this.stucardInfo = stucardInfo;
     }
 }

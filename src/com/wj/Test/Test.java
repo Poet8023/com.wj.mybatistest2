@@ -2,6 +2,7 @@ package com.wj.Test;
 
 import com.wj.entity.Grade;
 import com.wj.entity.Student;
+import com.wj.entity.StudentClass;
 import com.wj.mapper.StudentMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -18,8 +19,10 @@ public class Test {
         Test te=new Test();
 //        te.quarrybyid();
 //       te.quarrystubySQLtag();
-        te.quarryStuWithStunosInGrade();
-//        te.quarry();
+//        te.quarryStuWithStunosInGrade();
+//        te.quarryStudnetByNoWithObO();
+        te.quarryStudentAndClass();
+//        te.quarry()
 //        te.add();
 //        te.quarry();
 //        te.delete();
@@ -114,6 +117,30 @@ public class Test {
         grade.setStuNos(stuNos);
         List<Student> student = studentmapper.quarryStuWithStunosInGrade(grade);
         System.out.println(student);
+        session.close();
+    }
+    //一对一查询
+    public void  quarryStudnetByNoWithObO()throws IOException{
+        Reader reader=Resources.getResourceAsReader("config.xml");
+        SqlSessionFactory sessionfactory=new SqlSessionFactoryBuilder().build(reader);
+        SqlSession session=sessionfactory.openSession();
+        StudentMapper studentmapper = session.getMapper(StudentMapper.class);
+        Student student = studentmapper.quarryStudnetByNoWithObO(1);
+        System.out.println(student);
+        session.close();
+    }
+    //一对多查询
+    public void  quarryStudentAndClass()throws IOException{
+        Reader reader=Resources.getResourceAsReader("config.xml");
+        SqlSessionFactory sessionfactory=new SqlSessionFactoryBuilder().build(reader);
+        SqlSession session=sessionfactory.openSession();
+        StudentMapper studentmapper = session.getMapper(StudentMapper.class);
+        StudentClass studentClass = studentmapper.quarryStudentAndClass(1);
+        System.out.println(studentClass.getclassId()+","+studentClass.getclassName());
+        List<Student> students = studentClass.getStudents();
+        for (Student stu:students) {
+            System.out.println(stu.getStuno()+","+stu.getStuname()+","+stu.getStuage());
+        }
         session.close();
     }
 }
