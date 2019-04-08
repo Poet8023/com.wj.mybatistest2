@@ -9,9 +9,14 @@
     <properties resource="db.properties"/>
     <settings>
         <setting name="logImpl" value="LOG4J"/>
+        <!-- 开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 关闭立即加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 关闭立即加载-->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
-    
-    
+
     <!--设置单个别名-->
     <typeAliases>
         <package name="com.wj.entity"/>
@@ -32,7 +37,7 @@
     </environments>
     <!-- mapping文件路径配置 -->
     <mappers>
-        <mapper resource="com/wj/mapper/studentMapper.xml"/>
+        <mapper resource="com/wj/mapper/StudentMapper.xml"/>
+        <mapper resource="com/wj/mapper/StudentCardMapper.xml"/>
     </mappers>
-
 </configuration>

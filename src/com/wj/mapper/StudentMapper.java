@@ -39,4 +39,5 @@ public interface StudentMapper {
 
     public abstract  StudentClass quarryStudentAndClass(int classid);
 
+    List<Student> quarryStudnetWithlazyLoding();
 }

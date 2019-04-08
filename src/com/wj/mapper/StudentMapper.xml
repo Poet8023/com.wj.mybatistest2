@@ -10,6 +10,8 @@
 
 <mapper namespace="com.wj.mapper.StudentMapper">
 
+    <cache/>
+
     <select id="quarry" resultType="student">
           select * from student
         </select>
@@ -52,8 +54,8 @@
               </if>
         </where>
     </select>
-
-    <select id="quarryStudnetByNoWithObO" parameterType="int" resultMap="stu_stucard_map">
+    <!--useCache 标签可以关闭二级缓存 -->
+    <select id="quarryStudnetByNoWithObO" parameterType="int" resultMap="stu_stucard_map" flushCache="true">
         select s.*,c.* from student s inner join stucard c on s.stucardid=c.stucardid where stuno=#{stuNo}
     </select>
     <resultMap id="stu_stucard_map" type="student">
@@ -67,6 +69,22 @@
         <association property="studentCard" javaType="StudentCard">
             <id property="stucardId" column="stucardid"/>
             <result property="stucardInfo" column="stucardinfo"/>
+        </association>
+    </resultMap>
+
+    <select id="quarryStudnetWithlazyLoding" parameterType="int" resultMap="stu_stucard_lazy_map">
+        select * from student
+    </select>
+    <resultMap id="stu_stucard_lazy_map" type="student">
+        <!--学生的信息-->
+        <!-- 注意property中的值要和类里面的属性严格对应，区分大小写   column中的值为数据库中的值，不区分大小写  -->
+        <id property="stuno" column="stuno"/>
+        <result property="stuname" column="stuname"/>
+        <result property="stuage" column="stuage"/>
+        <!--  一对一的时候用association  javaType指定该属性的类型-->
+        <!--   一对多的时候用collection -->
+        <association property="studentCard" javaType="StudentCard" select="com.wj.mapper.StudentCardMapper.quarrstucardinfo" column="stucardid">
+
         </association>
     </resultMap>
 

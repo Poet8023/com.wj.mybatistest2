@@ -2,6 +2,7 @@ package com.wj.Test;
 
 import com.wj.entity.Grade;
 import com.wj.entity.Student;
+import com.wj.entity.StudentCard;
 import com.wj.entity.StudentClass;
 import com.wj.mapper.StudentMapper;
 import org.apache.ibatis.io.Resources;
@@ -20,8 +21,9 @@ public class Test {
 //        te.quarrybyid();
 //       te.quarrystubySQLtag();
 //        te.quarryStuWithStunosInGrade();
-//        te.quarryStudnetByNoWithObO();
-        te.quarryStudentAndClass();
+        te.quarryStudnetByNoWithObO();
+//        te.quarryStudentAndClass();
+//        te.quarryStudnetWithlazyLoding();
 //        te.quarry()
 //        te.add();
 //        te.quarry();
@@ -123,10 +125,44 @@ public class Test {
     public void  quarryStudnetByNoWithObO()throws IOException{
         Reader reader=Resources.getResourceAsReader("config.xml");
         SqlSessionFactory sessionfactory=new SqlSessionFactoryBuilder().build(reader);
+        //第一次查询
         SqlSession session=sessionfactory.openSession();
         StudentMapper studentmapper = session.getMapper(StudentMapper.class);
         Student student = studentmapper.quarryStudnetByNoWithObO(1);
         System.out.println(student);
+        session.close();
+        //第二次查询
+        SqlSession session2=sessionfactory.openSession();
+        StudentMapper studentmapper2 = session2.getMapper(StudentMapper.class);
+        Student student2 = studentmapper2.quarryStudnetByNoWithObO(1);
+        System.out.println(student2);
+        session2.close();
+        //第三次查询
+        SqlSession session3=sessionfactory.openSession();
+        StudentMapper studentmapper3 = session3.getMapper(StudentMapper.class);
+        Student student3 = studentmapper3.quarryStudnetByNoWithObO(1);
+        System.out.println(student3);
+        session3.close();
+
+//        Student student2 = studentmapper.quarryStudnetByNoWithObO(1);
+//        System.out.println(student2);
+
+
+    }
+
+    //延迟加载
+    public void  quarryStudnetWithlazyLoding()throws IOException{
+        Reader reader=Resources.getResourceAsReader("config.xml");
+        SqlSessionFactory sessionfactory=new SqlSessionFactoryBuilder().build(reader);
+        SqlSession session=sessionfactory.openSession();
+        StudentMapper studentmapper = session.getMapper(StudentMapper.class);
+        List<Student> students = studentmapper.quarryStudnetWithlazyLoding();
+        for (Student student:students) {
+            System.out.println(student.getStuno()+","+student.getStuname());
+
+            StudentCard studentCard = student.getStudentCard();
+            System.out.println(studentCard.getStucardId()+","+studentCard.getStucardInfo());
+        }
         session.close();
     }
     //一对多查询

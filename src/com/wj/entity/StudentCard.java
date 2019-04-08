@@ -1,6 +1,8 @@
 package com.wj.entity;
 
-public class StudentCard {
+import java.io.Serializable;
+
+public class StudentCard implements Serializable {
     private  int stucardId;
     private String stucardInfo;
 

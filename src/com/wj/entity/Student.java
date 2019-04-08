@@ -1,6 +1,8 @@
 package com.wj.entity;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     //学生信息
     private int stuno;
     private  String stuname;
